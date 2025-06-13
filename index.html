@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brain Cancer Detector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e9f5ff, #fdfbfb);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            justify-content: center;
+            color: #333;
+        }
+
+        h1 {
+            margin-bottom: 16px;
+            font-size: 2.5rem;
+            color: #222;
+            animation: fadeInSlide 0.8s ease-out forwards;
+        }
+
+        form {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            width: 90%;
+            max-width: 420px;
+            animation: fadeInSlide 1s ease-out forwards;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border: 2px dashed #bbb;
+            border-radius: 10px;
+            width: 100%;
+            text-align: center;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            border-color: #4CAF50;
+        }
+
+        input[type="submit"] {
+            padding: 12px 25px;
+            font-size: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3e9742;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .prediction {
+            margin-top: 40px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .prediction h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+            color: #444;
+        }
+
+        .prediction p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        img {
+            max-width: 100%;
+            width: 320px;
+            border-radius: 14px;
+            margin-top: 20px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            form {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Brain Cancer Detector</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <input type="submit" value="Upload and Classify">
+    </form>
+
+    {% if image_url %}
+    <div class="prediction">
+        <h3>Prediction:</h3>
+        <p><strong>{{ predicted_class }}</strong> (Confidence: {{ confidence }}%)</p>
+        <img src="{{ image_url }}" alt="Uploaded Image">
+    </div>
+    {% endif %}
+</body>
+</html>
